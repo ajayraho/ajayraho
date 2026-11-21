@@ -27,19 +27,26 @@ LOGOS = os.path.join(ASSETS, "logos")
 
 # ----------------------------------------------------------------- CONTENT
 NAME = "Ajit Kumar"
-TAGLINE = "Backend engineer · Java / Spring · distributed systems"
-SUBLINE = "M.Tech AI, IIT Patna · SDE I at Success Numbers"
+TAGLINE = "Backend and AI engineer · Java / Spring · Python · LLM agents"
+SUBLINE = "M.Tech in Artificial Intelligence, IIT Patna"
 
-NOW = ["SDE I at Success Numbers. I build Spring Boot services for retail",
-       "returns and payments that run in hundreds of stores, and I own",
-       "the Saudi and UAE tax-compliance integrations."]
-BEFORE = "Research intern at TCS Research: graph attention networks for protein dynamics."
-STATS = [("9.46", "CGPA", "M.Tech AI, IIT Patna"),
-         ("99.3", "percentile", "GATE 2024"),
-         ("67%", "lower latency", "cart retrieval at work")]
+WORK_ON = ["Backend services that have to stay correct: payments, returns",
+           "and tax compliance for retail stores. Lately, infrastructure for",
+           "LLM agents, from security gateways to self-healing RAG."]
+RESEARCH_LINE = "Neuro-symbolic reasoning and agentic search, two papers under review at IEEE."
+EXPERIENCE = [("Software Development Engineer", "Success Numbers", "2025–26"),
+              ("Research Intern", "TCS Research", "2025"),
+              ("Software Development Engineer", "CloudInfosoft", "2023–24")]
 
 # Shown two per row, in this order. desc: 3 lines of ~58 chars max.
 PROJECTS = [
+    dict(slug="mcpsec", logo="mcpsec.svg", url="https://github.com/ajayraho/mcpsec",
+         title="mcpsec", cat="Security gateway for AI agents",
+         desc=["Sits between an agent and its MCP tools. Once a run has seen",
+               "both untrusted and private data, it blocks, or asks you about,",
+               "any tool call that could send that data out."],
+         metric="30% → 0%", mlabel=["data leaks under", "prompt injection"],
+         chips=["Python", "MCP", "Ollama"]),
     dict(slug="waas", logo="waas.svg", url="https://github.com/ajayraho/waas",
          title="WaaS", cat="Waitlist-as-a-Service · backend",
          desc=["A multi-tenant waitlist any product can plug into. People",
@@ -47,13 +54,6 @@ PROJECTS = [
                "Redis Lua scripts make sure no slot is handed out twice."],
          metric="0.4 s", mlabel=["500 concurrent joins", "336 ms p99 (k6)"],
          chips=["Java", "Spring Boot", "Redis"]),
-    dict(slug="saga", logo="saga-checkout.svg", url="https://github.com/ajayraho/saga-checkout",
-         title="saga-checkout", cat="Distributed payment saga",
-         desc=["Orchestrates a 4-step checkout across services over Kafka,",
-               "with a transactional outbox, idempotent requests and",
-               "automatic compensation when a step fails."],
-         metric="16.3/s", mlabel=["completed sagas", "across 5 JVMs"],
-         chips=["Java", "Kafka", "PostgreSQL"]),
     dict(slug="nanofuse", logo="nanofuse.svg", url="https://github.com/ajayraho/nanofuse",
          title="nanofuse", cat="Tensor graph compiler",
          desc=["Built from scratch: a lazy execution graph, an op-fusion",
@@ -61,36 +61,36 @@ PROJECTS = [
                "and multi-threaded C++ with OpenMP."],
          metric="4.31×", mlabel=["faster than NumPy", "on the C++ backend"],
          chips=["Python", "C++", "OpenMP"]),
+    dict(slug="saga", logo="saga-checkout.svg", url="https://github.com/ajayraho/saga-checkout",
+         title="saga-checkout", cat="Distributed payment saga",
+         desc=["Orchestrates a 4-step checkout across services over Kafka,",
+               "with a transactional outbox, idempotent requests and",
+               "automatic compensation when a step fails."],
+         metric="16.3/s", mlabel=["completed sagas", "across 5 JVMs"],
+         chips=["Java", "Kafka", "PostgreSQL"]),
     dict(slug="ragdrift", logo="rag-drift.svg", url="https://github.com/ajayraho/rag-drift",
-         title="rag-drift", cat="Agentic AI · MLOps",
-         desc=["An Airflow pipeline that keeps a LangChain agent's",
-               "knowledge base fresh, and catches and repairs upstream",
-               "schema drift before it reaches the agent."],
-         metric="Incremental", mlabel=["re-embeds only", "what changed"],
-         chips=["Airflow", "LangChain"]),
-    dict(slug="oss-scout", logo="oss-scout.png", url="https://github.com/ajayraho/oss-scout",
-         title="OSS Scout", cat="Web app · MCP server",
-         desc=["Finds beginner-friendly GitHub issues by language, label,",
-               "age, comments and assignee, with live rate-limit",
-               "countdowns and a per-repo issue view."],
-         metric="MCP", mlabel=["search issues straight", "from an AI chat"],
-         chips=["Python", "Streamlit", "MCP"]),
-    dict(slug="screenrec", logo="screenrec.ico", url="https://github.com/ajayraho/screenrec",
-         title="ScreenRec", cat="Windows app · on-device AI",
-         desc=["Background screen recorder that captures system audio and",
-               "mic together, with global hotkeys that work inside",
-               "full-screen apps and remote desktop."],
-         metric="Offline", mlabel=["Whisper transcripts and", "local LLM summaries"],
-         chips=["C#", ".NET 9", "FFmpeg"]),
+         title="rag-drift", cat="Agent-ready RAG pipeline",
+         desc=["An hourly Airflow DAG keeps a LangChain agent's knowledge",
+               "base in sync: it re-embeds only what changed and remaps",
+               "renamed schema fields on its own."],
+         metric="0.925", mlabel=["Hit@5 after reranking", "(was 0.85)"],
+         chips=["Airflow", "LangChain", "ChromaDB"]),
+    dict(slug="reelsgallery", logo="reelsgallery.svg", url="https://github.com/ajayraho/reels-gallery",
+         title="ReelsGallery", cat="Android gallery · on-device ML",
+         desc=["A gallery with a reel-style player and offline tag search.",
+               "Tags come from OCR and image labels, plus a custom",
+               "TensorFlow Lite model that listens to each video's audio."],
+         metric="Offline", mlabel=["all tagging runs", "on the phone"],
+         chips=["Kotlin", "Compose", "TF Lite"]),
 ]
 
 PAPERS = [("PC-GoT", ["Policy-Controlled Graph-of-Thought for", "Neuro-Symbolic Logical Reasoning"],
-           "IEEE Trans. on Knowledge and Data Engineering"),
+           "Under review, IEEE TKDE", "84.1% zero-shot accuracy on FOLIO"),
           ("CAM-GEO", ["Causal Agentic Multimodal GEO for", "E-Commerce Search Visibility"],
-           "IEEE Trans. on Computational Social Systems")]
+           "Under review, IEEE TCSS", "40.47% lift in generative-search visibility")]
 TOOLKIT = [("Backend", ["Java", "Spring Boot", "Kafka", "Redis", "PostgreSQL"]),
-           ("AI / ML", ["Python", "PyTorch", "LangChain", "Airflow", "MLflow"]),
-           ("Shipping", ["Docker", "Azure", "React", "TypeScript"])]
+           ("AI / ML", ["Python", "PyTorch", "LangChain", "MCP", "Airflow", "MLflow"]),
+           ("Shipping", ["Docker", "Azure", "React", "Kotlin"])]
 
 CONTACT = [("email", "Email", "ajitkumar13082024@gmail.com", "mailto:ajitkumar13082024@gmail.com"),
            ("linkedin", "LinkedIn", "in/ajayraho", "https://linkedin.com/in/ajayraho"),
@@ -147,7 +147,7 @@ def chips(x, y, items, size=13, gap=8, maxw=None):
 
 def text_w(s, size):
     """Rough rendered width, good enough to place text after a big number."""
-    return sum(0.74 if c.isupper() else 0.32 if c in " ./" else 0.6 for c in s) * size
+    return sum(0.74 if c.isupper() else 0.9 if c in "%→" else 0.32 if c in " ./" else 0.6 for c in s) * size
 
 
 # ----------------------------------------------------------------- LOGOS
@@ -274,18 +274,18 @@ def card(p):
 def about():
     W, H = 1200, 250
     b = panel(W, H)
-    b += f'<text x="44" y="62" font-size="14" font-weight="700" fill="{C["acc"]}" letter-spacing="2">NOW</text>'
-    for i, line in enumerate(NOW):
+    b += f'<text x="44" y="62" font-size="14" font-weight="700" fill="{C["acc"]}" letter-spacing="2">WHAT I WORK ON</text>'
+    for i, line in enumerate(WORK_ON):
         b += f'<text x="44" y="{94+i*28}" font-size="19" fill="{C["ink"]}">{esc(line)}</text>'
-    b += f'<text x="44" y="196" font-size="14" font-weight="700" fill="{C["acc"]}" letter-spacing="2">BEFORE</text>'
-    b += f'<text x="44" y="224" font-size="17" fill="{C["body"]}">{esc(BEFORE)}</text>'
-    for i, (n, u, s) in enumerate(STATS):
+    b += f'<text x="44" y="196" font-size="14" font-weight="700" fill="{C["acc"]}" letter-spacing="2">RESEARCH</text>'
+    b += f'<text x="44" y="224" font-size="17" fill="{C["body"]}">{esc(RESEARCH_LINE)}</text>'
+    for i, (role, org, years) in enumerate(EXPERIENCE):
         y = 34 + i * 62
-        b += (f'<rect x="806" y="{y}" width="350" height="52" rx="14" fill="#ffffff" stroke="{C["bd"]}" stroke-width="1.5"/>'
-              f'<text x="826" y="{y+36}" font-size="28" font-weight="800" fill="{C["mid"]}">{esc(n)}</text>'
-              f'<text x="914" y="{y+23}" font-size="14" font-weight="700" fill="{C["ink"]}">{esc(u)}</text>'
-              f'<text x="914" y="{y+41}" font-size="13" fill="{C["soft"]}">{esc(s)}</text>')
-    return svg(W, H, b, label=" ".join(NOW) + " " + BEFORE)
+        b += (f'<rect x="790" y="{y}" width="366" height="52" rx="14" fill="#ffffff" stroke="{C["bd"]}" stroke-width="1.5"/>'
+              f'<text x="808" y="{y+23}" font-size="15" font-weight="700" fill="{C["ink"]}">{esc(role)}</text>'
+              f'<text x="808" y="{y+41}" font-size="13" fill="{C["soft"]}">{esc(org)}</text>'
+              f'<text x="1138" y="{y+32}" font-size="13" fill="{C["acc"]}" text-anchor="end">{esc(years)}</text>')
+    return svg(W, H, b, label=" ".join(WORK_ON) + " " + RESEARCH_LINE)
 
 
 def section_label(text):
@@ -298,27 +298,28 @@ def section_label(text):
 
 
 def research():
-    W, H = 600, 320
-    b = panel(W, H) + f'<text x="32" y="56" font-size="14" font-weight="700" fill="{C["acc"]}" letter-spacing="2">PAPERS · UNDER REVIEW</text>'
-    for i, (t, lines, venue) in enumerate(PAPERS):
-        y = 96 + i * 110
-        b += f'<rect x="32" y="{y-22}" width="6" height="96" rx="3" fill="#95d5b2"/>'
+    W, H = 600, 340
+    b = panel(W, H) + f'<text x="32" y="56" font-size="14" font-weight="700" fill="{C["acc"]}" letter-spacing="2">PAPERS</text>'
+    for i, (t, lines, venue, result) in enumerate(PAPERS):
+        y = 96 + i * 124
+        b += f'<rect x="32" y="{y-22}" width="6" height="110" rx="3" fill="#95d5b2"/>'
         b += f'<text x="54" y="{y}" font-size="21" font-weight="700" fill="{C["ink"]}">{esc(t)}</text>'
+        b += f'<text x="{54 + int(text_w(t, 21)) + 14}" y="{y-1}" font-size="13" font-style="italic" fill="{C["soft"]}">{esc(venue)}</text>'
         for j, line in enumerate(lines):
             b += f'<text x="54" y="{y+25+j*21}" font-size="15" fill="{C["body"]}">{esc(line)}</text>'
-        b += f'<text x="54" y="{y+70}" font-size="13" font-style="italic" fill="{C["soft"]}">{esc(venue)}</text>'
-    b += sprig(574, 320)
-    return svg(W, H, b, SWAY, "Papers under review: " + ", ".join(p[0] for p in PAPERS))
+        b += f'<text x="54" y="{y+76}" font-size="14" font-weight="700" fill="{C["mid"]}">{esc(result)}</text>'
+    b += sprig(574, H)
+    return svg(W, H, b, SWAY, "Papers under review: " + "; ".join(f"{p[0]} ({p[2]}): {p[3]}" for p in PAPERS))
 
 
 def toolkit():
-    W, H = 600, 320
+    W, H = 600, 340
     b = panel(W, H) + f'<text x="32" y="56" font-size="14" font-weight="700" fill="{C["acc"]}" letter-spacing="2">WHAT I REACH FOR</text>'
     for i, (g, items) in enumerate(TOOLKIT):
         y = 96 + i * 76
         b += f'<text x="32" y="{y}" font-size="15" font-weight="700" fill="{C["ink"]}">{esc(g)}</text>'
         b += chips(32, y + 12, items, size=14, maxw=536)
-    b += sprig(574, 320)
+    b += sprig(574, H)
     return svg(W, H, b, SWAY, "Toolkit: " + ", ".join(t for _, it in TOOLKIT for t in it))
 
 
